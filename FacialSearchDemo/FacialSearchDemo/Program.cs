@@ -14,12 +14,13 @@ namespace FacialSearchDemo
             var groupID = ConfigurationManager.AppSettings["GroupID"];
             var groupName = ConfigurationManager.AppSettings["GroupName"];
             var filePath = ConfigurationManager.AppSettings["FilePath"];
+            var fileName = ConfigurationManager.AppSettings["TestImage"];
 
             Program.PopulatePersonGroups(groupID, groupName);
 
-            Program.RunDescription(groupID, filePath);
+            Program.RunDescription(groupID, filePath + fileName);
 
-            Program.RunSearch(groupID, filePath);
+            Program.RunSearch(groupID, filePath + fileName);
 
             Console.ReadLine();
         }
@@ -32,7 +33,7 @@ namespace FacialSearchDemo
             Console.WriteLine("Populate Person Groups");
             Console.WriteLine("<*>---------------------------------------------------------<*>");
 
-            string basePath = @"C:\Temp\Faces\";
+            string basePath = ConfigurationManager.AppSettings["FilePath"];
             var peopleNames = ConfigurationManager.AppSettings["PeopleNames"];
             List<string> people = new List<string>();
             people = peopleNames.Split(',').ToList();
@@ -104,7 +105,7 @@ namespace FacialSearchDemo
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("<*>---------------------------------------------------------<*>");
-            Console.WriteLine("Run Computer VIsion Description");
+            Console.WriteLine("Run Computer Vision Description");
             Console.WriteLine("<*>---------------------------------------------------------<*>");
 
             var faceDetectionProvider = new FaceDetectionProvider();
